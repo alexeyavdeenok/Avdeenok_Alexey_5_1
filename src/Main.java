@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Main {
+public class Main { // Основной класс
   private static final Scanner input = new Scanner(System.in);
   private static final ArrayList<Person> list = new ArrayList<>();
   private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
@@ -37,43 +37,43 @@ public class Main {
         case 2:
           createObject();
           break;
-        case 3:
+        case 3: // Изменение полей объекта его индексу
           try {
             emptyListCheck();
-          if (changeObject()) {
-            System.out.println("Вы завершили изменение");
-            break;
-          } else {
-            System.out.println("Неверный индекс");
-            break;
-          }
-          } catch (EmptyListException e){//Простой перехват исключения и логирование
+            if (changeObject()) {
+              System.out.println("Вы завершили изменение");
+              break;
+            } else {
+              System.out.println("Неверный индекс");
+              break;
+            }
+          } catch (EmptyListException e) { // Простой перехват исключения и логирование
             LOGGER.log(Level.SEVERE, "Пустой список: " + e.getMessage(), e);
             break;
           }
-        case 4:
+        case 4: // Вывод содержимого списка
           try {
             emptyListCheck();
             printObject();
             break;
-          } catch (EmptyListException e){
+          } catch (EmptyListException e) {
             LOGGER.log(Level.WARNING, "Пустой список: " + e.getMessage(), e);
             break;
           }
-        case 5:
+        case 5: // Выполнение алгоритма для объекта по индексу
           try {
             emptyListCheck();
-          if (doAlgoritm()) {
-            break;
-          } else {
-            System.out.println("Неверный индекс");
-            break;
+            if (doAlgoritm()) {
+              break;
+            } else {
+              System.out.println("Неверный индекс");
+              break;
             }
           } catch (EmptyListException e) {
             LOGGER.log(Level.SEVERE, "Пустой список: " + e.getMessage(), e);
             break;
           }
-        case 6:
+        case 6: // Сортировка списка по выбранному полю
           try {
             emptyListCheck();
             sortList();
@@ -82,7 +82,7 @@ public class Main {
             LOGGER.log(Level.SEVERE, "Пустой список: " + e.getMessage(), e);
             break;
           }
-        case 7:
+        case 7: // Завршение работы программы
           System.out.println("Программа завершена");
           System.exit(0);
           break;
@@ -92,47 +92,47 @@ public class Main {
     }
   }
 
-  private static void createObject() {
+  private static void createObject() { // Метод для создания объекта класса Person
     System.out.println("Введите имя: ");
     String name = input.next();
     System.out.println("Выберите пол (мужской / женский)");
     String gender = input.next();
 
     try {
-    int age;
-    double height;
-    double weight;
+      int age;
+      double height;
+      double weight;
 
-    System.out.println("Введите возраст:");
-    age = input.nextInt();
+      System.out.println("Введите возраст:");
+      age = input.nextInt();
 
-    System.out.println("Введите рост в сантиметрах:");
-    height = input.nextDouble();
+      System.out.println("Введите рост в сантиметрах:");
+      height = input.nextDouble();
 
-    System.out.println("Введите вес в килограммах:");
-    weight = input.nextDouble();
+      System.out.println("Введите вес в килограммах:");
+      weight = input.nextDouble();
 
-    try {
-    Person person = new Person(name, gender, age, height, weight);
-    list.add(person);
-    System.out.println("Объект добавлен");
-    } catch (FalseInputException e) {
-      System.out.println(e.getMessage());
-    }
+      try {
+        Person person = new Person(name, gender, age, height, weight);
+        list.add(person);
+        System.out.println("Объект добавлен");
+      } catch (FalseInputException e) {
+        System.out.println(e.getMessage());
+      }
     } catch (Exception e) {
       input.next();
       System.out.println("Ошибка ввода");
     }
   }
 
-  private static void printObject() {
+  private static void printObject() { // Метод для вывода содержимого списка
     for (Person i : list) {
       System.out.println("Индекс объекта: " + list.indexOf(i));
       System.out.println(i);
     }
   }
 
-  private static boolean changeObject() {
+  private static boolean changeObject() { //
     printObject();
     System.out.println("Введите индекс объекта для изменения полей: ");
     int index;
@@ -160,39 +160,39 @@ public class Main {
         input.next();
       }
       try {
-      switch (choice) {
-        case 1:
-          System.out.println("Введите имя:");
-          String name = input.next();
-          person.setName(name);
-          break;
-        case 2:
-          System.out.println("Введите гендер:");
-          String gender = input.next();
-          person.setGender(gender);
-          person.setRetiree();
-          break;
-        case 3:
-          System.out.println("Введите возраст:");
-          int age = input.nextInt();
-          person.setAge(age);
-          person.setRetiree();
-          break;
-        case 4:
-          System.out.println("Введите рост:");
-          double height = input.nextDouble();
-          person.setHeight(height);
-          break;
-        case 5:
-          System.out.println("Введите вес:");
-          double weight = input.nextDouble();
-          person.setWeight(weight);
-          break;
-        case 6:
-          return true;
-        default:
-          System.out.println("Ошибка ввода");
-      }
+        switch (choice) {
+          case 1:
+            System.out.println("Введите имя:");
+            String name = input.next();
+            person.setName(name);
+            break;
+          case 2:
+            System.out.println("Введите гендер:");
+            String gender = input.next();
+            person.setGender(gender);
+            person.setRetiree();
+            break;
+          case 3:
+            System.out.println("Введите возраст:");
+            int age = input.nextInt();
+            person.setAge(age);
+            person.setRetiree();
+            break;
+          case 4:
+            System.out.println("Введите рост:");
+            double height = input.nextDouble();
+            person.setHeight(height);
+            break;
+          case 5:
+            System.out.println("Введите вес:");
+            double weight = input.nextDouble();
+            person.setWeight(weight);
+            break;
+          case 6:
+            return true;
+          default:
+            System.out.println("Ошибка ввода");
+        }
       } catch (FalseInputException e) {
         System.out.println(e.getMessage());
       } catch (Exception e) {
@@ -201,7 +201,8 @@ public class Main {
       }
     }
   }
-  private static void emptyListCheck() throws EmptyListException{
+
+  private static void emptyListCheck() throws EmptyListException {
     if (list.isEmpty()) {
       throw new EmptyListException("Объекты не созданы");
     }
@@ -279,5 +280,3 @@ public class Main {
     }
   }
 }
-
-
